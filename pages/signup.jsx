@@ -29,15 +29,13 @@ const Text = styled.p`
 `
 
 function SignupPage () {
-  const { register, handleSubmit, formState: { erros } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: joiResolver(signupSchema)
   })
  
   const handleForm = (data) => {
     console.log(data)
   }
-
-  console.log(erros)
 
   return (
     <ImageWithSpace>
@@ -46,12 +44,12 @@ function SignupPage () {
       <FormContainer>
         <H2>Crie sua conta!</H2>
         <Form onSubmit={handleSubmit(handleForm)}>
-          <Input label="Nome" {...register('firstName')} />
-          <Input label="Sobrenome" {...register('lastName')} />
-          <Input label="Usuário" {...register('user')} />
-          <Input label="E-mail" type="e-mail" {...register('email')} />
-          <Input label="Senha" type="password" {...register('password')} />
-          <Button type="submit">Cadastrar</Button>
+          <Input label="Nome" {...register('firstName')} error={errors.firstName} />
+          <Input label="Sobrenome" {...register('lastName')} error={errors.lastName}/>
+          <Input label="Usuário" {...register('user')} error={errors.user}/>
+          <Input label="E-mail" type="e-mail" {...register('email')} error={errors.email}/>
+          <Input label="Senha" type="password" {...register('password')} error={errors.password}/>
+          <Button type="submit" desabled={Object.keys(errors).length > 0}>Cadastrar</Button>
         </Form>
         <Text>Já possui conta? <Link href="/login">Faça seu login</Link></Text>
       </FormContainer>
