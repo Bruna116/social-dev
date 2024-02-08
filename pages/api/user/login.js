@@ -8,7 +8,6 @@ import { login } from '../../../modules/user/user.service'
 import { ironConfig } from '../../../lib/middlewares/ironSession'
 import { loginSchema } from '../../../modules/user/user.schema'
 
-
 const handler = createHandler()
 
 handler.post(validate({ body: loginSchema }), async (req, res) => {
@@ -21,9 +20,7 @@ handler.post(validate({ body: loginSchema }), async (req, res) => {
     await req.session.save()
     res.send({ ok: true })
   } catch (err) {
-    console.error(err)
     return res.status(400).send(err.message)
-    throw err
   }
 })
 
