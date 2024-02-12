@@ -4,8 +4,8 @@ import createHandler from '../../../lib/middlewares/nextConnect'
 import validate from '../../../lib/middlewares/validation'
 import { ironConfig } from '../../../lib/middlewares/ironSession'
 
-import { criatePostSchema } from '../../../modules/post/post.schema'
-import { criatePost, getPosts } from '../../../modules/post/post.service'
+import { criatePostSchema, deletePostSchema } from '../../../modules/post/post.schema'
+import { criatePost, deletePost, getPosts } from '../../../modules/post/post.service'
 
 const handler = criateHandler()
 
@@ -30,5 +30,16 @@ handler
       return res.status(500).send(err.message)
     }
   })
+  .delete(validate(deletPostSchema), async (req, res) => {
+    try {
+      if (!req.session.user) return res.status(401).send()
+      const deletedPost = await deletePost(req.body.id, req.session.user)
+      if (deletedPost)
+        return res.status(200).send({ ok: true})
 
+      return res.status(400).send('post not found')
+    } catch (err) {
+      return res.status(500).send(err.message)
+    }
+  })
 export default withIronSessionApiRoute(handler, ironConfig)

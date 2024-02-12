@@ -47,8 +47,7 @@ function HomePage ({ user }) {
       <Navbar />
       <Content>
         <Container>
-          <CreateP
-          ost username={user.user} />
+          <CreatePost username={user.user} />
           <LastPostText>Últimas postagens:</LastPostText>
           <PostContainer>
             {
@@ -58,6 +57,8 @@ function HomePage ({ user }) {
                   text={post.text}
                   user={post.criatedBy.user}
                   date={post.criatedDate}
+                  isOwner={post.createdBy._id === user.id}
+                  id={post._id}
                 />
               )
             }
