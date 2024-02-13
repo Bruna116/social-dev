@@ -8,7 +8,7 @@ import { ironConfig } from '../lib/middlewares/ironSession'
 
 import Navbar from '../src/components/layout/Navbar'
 import Container from '../src/components/layout/Container'
-import CreatePost from '../src/components/cards/CeatePost'
+import CreatePost from '../src/components/cards/CreatePost'
 import H3 from '../src/components/typography/H3'
 import Post from '../src/components/cards/Post'
 
