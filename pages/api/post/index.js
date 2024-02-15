@@ -10,11 +10,11 @@ import { createPost, deletePost, getPosts, editPost } from '../../../modules/pos
 const handler = createHandler()
 
 handler 
-  .post(validate({ body: criatePostSchema }), async (req, res) => {
+  .post(validate({ body: createPostSchema }), async (req, res) => {
     try {
       if (!req.session.user) return res.status(401).send()
 
-      const newPost = await criatePost(req.body, req.session.user)
+      const newPost = await createPost(req.body, req.session.user)
       res.status(201).send(newPost)
     } catch (err) {
       return res.status(500).send(err.message)

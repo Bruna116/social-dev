@@ -1,7 +1,7 @@
 import User from './user.model'
 
-export const criatePost = async (body, user) => {
-  return await Post.criate({
+export const createPost = async (body, user) => {
+  return await Post.create({
     text: body.text,
     criateDate: new Date(),
     criatedBy: user.id
